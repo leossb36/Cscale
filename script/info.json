@@ -1,0 +1,28 @@
+{
+    "persons": [
+        "Leonardo Barreiros",
+        "Erick Santos",
+        "Eric Gomes",
+        "Vinicius Lopes",
+        "Luis Henrique",
+        "Pedro Victor",
+        "João Paulo",
+        "Gabriel Guilherme",
+        "Gabriel de sousa"
+    ],
+    "week": [
+        "Segunda-feira",
+        "Terça-feira",
+        "Quarta-feira",
+        "Quinta-feira",
+        "Sexta-feira",
+        "Sábado",
+        "Domingo"
+    ],
+    "hours": [
+        "7:00",
+        "10:00",
+        "17:00",
+        "19:30"
+    ]
+}
