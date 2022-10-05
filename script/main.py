@@ -108,13 +108,25 @@ def getServiceForDay(availabilityForDay, weekendDay, notHourWeekDay, service, sc
       if (gonnaBe):
         subscribePerson(scale, person, service)
 
+def validateServiceByData(day, hour):
+  weekDay = (day != 'Sábado' or day != 'Domingo')
+  invalidHourToWeek = (hour == '10:00' or hour == '17:00')
+
+  return weekDay, invalidHourToWeek
 
 def createService(dataframe):
   services = []
   for day in dataframe['week']:
     for hour in dataframe['hours']:
-      serviceInstance = Service(day, hour)
-      services.append(serviceInstance)
+      weekDay, invalidHourToWeek = validateServiceByData(day, hour)
+      if (weekDay and invalidHourToWeek):
+        continue
+      elif (not weekDay and not invalidHourToWeek):
+        serviceInstance = Service(day, hour)
+        services.append(serviceInstance)
+      else:
+        serviceInstance = Service(day, hour)
+        services.append(serviceInstance)
 
   return services
 

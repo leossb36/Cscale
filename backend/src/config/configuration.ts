@@ -1,13 +1,11 @@
-export class ConfigService {
+export class ConfigurationServer {
   private readonly envConfig: { [key: string]: any } = null;
 
   constructor() {
     this.envConfig = {};
+    this.envConfig.port = +process.env.API_NODE_PORT;
     this.envConfig.mongo = {
-      url: process.env.MONGO_URL,
-    };
-    this.envConfig.server = {
-      port: process.env.API_NODE_PORT,
+      url: process.env.MONGODB_URL,
     };
   }
 

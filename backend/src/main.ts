@@ -1,12 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { swaggerConfiguration } from '@config/swagger.config';
-import { serverStatus } from '@config/server-log';
+import { ConfigurationServer } from './config/configuration';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const port: number = new ConfigurationServer().get('port');
 
-  swaggerConfiguration(app);
-  serverStatus(app);
+  app.listen(port).then(() => {
+    console.log(`🚀 HTTP server running on ${port} 🚀`);
+  });
 }
 bootstrap();
