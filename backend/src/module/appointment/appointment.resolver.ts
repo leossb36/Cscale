@@ -1,24 +1,24 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { AppointmentService } from './appointment.service';
 import { CreateAppointmentInput } from './dtos/inputs/create-appointment-input';
 import { Appointment } from './dtos/models/appointment.model';
 
 @Resolver(() => Appointment)
 export class AppointmentResolver {
+  constructor(private readonly appointmentService: AppointmentService) {}
+
   @Query(() => [Appointment])
-  async appointments() {
-    return [
-      {
-        appointmentDate: new Date(),
-      },
-    ];
+  async getAllAppointments() {
+    return await this.appointmentService.getAllAppointments();
+  }
+
+  @Query(() => [Appointment])
+  async getAppointmentById(@Args('id', { type: () => String }) id: string) {
+    return await this.appointmentService.getAppointmentById(id);
   }
 
   @Mutation(() => Appointment)
   async createAppointment(@Args('data') data: CreateAppointmentInput) {
-    const appointment = {
-      appointmentDate: data.appointmentDate,
-    };
-
-    return appointment;
+    return await this.appointmentService.createAppointment(data);
   }
 }
