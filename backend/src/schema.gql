@@ -3,7 +3,10 @@
 # ------------------------------------------------------
 
 type Appointment {
-  appointmentDate: DateTime!
+  _id: String!
+
+  """Appointment date """
+  appointDate: DateTime!
 }
 
 """
@@ -11,14 +14,43 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type User {
+  _id: String!
+
+  """User firstName """
+  firstName: String!
+
+  """User lastName """
+  lastName: String!
+
+  """User email """
+  email: String!
+}
+
 type Query {
-  appointments: [Appointment!]!
+  getAllUsers: [User!]!
+  getUserById(id: String!): [User!]!
+  getAllAppointments: [Appointment!]!
+  getAppointmentById(id: String!): [Appointment!]!
 }
 
 type Mutation {
+  createUser(data: CreateUserInput!): User!
   createAppointment(data: CreateAppointmentInput!): Appointment!
 }
 
+input CreateUserInput {
+  """first name of the user"""
+  firstName: String!
+
+  """last name of the user"""
+  lastName: String!
+
+  """email of the user"""
+  email: String!
+}
+
 input CreateAppointmentInput {
-  appointmentDate: DateTime!
+  """appointment date"""
+  appointDate: DateTime!
 }
