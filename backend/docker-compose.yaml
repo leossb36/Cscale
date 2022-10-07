@@ -48,7 +48,7 @@ services:
     container_name: mongo_container
     image: mongo
     volumes:
-      - mongo_data:/data/db
+      - mongo_data:/data/cscaledb
     ports:
       - 27017:27017
     networks:
